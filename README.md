@@ -292,6 +292,8 @@ I declare methods - class
 
 i can change at runtime - object, instance variable
 
+# 
+
 ## Chapter 3 : Know Your Variables
 
 **Declaring variables**
@@ -399,8 +401,115 @@ public class primitiveTypes {
 
 How this works:
 
-`Book b = new Book();`
+`Book b = new Book();`  object 1
 
-`Book d = new Book();`
+`Book c = new Book();`  object 2
 
 Above we create two reference variables `b` and `d`  and the two new object `b` and `d`  are stored in the heap.
+
+---
+
+`Book d = c;` 
+
+This creates a new reference variable called  `d`  which can be able to control object `c` . its like i have created a new remote to control object `c` using reference variable (remote) `c` and `d` .The `new` keyword is supposed to create a new object when not in use no new object is created as in the case above.
+
+---
+
+`c = b;` 
+
+This changes the object reference variable `c` controls. Previously, `c` controlled object 2 but now it controls #object 1 it’s assigned to reference variable `b` . Now  `c` never controls #object 2.
+
+**Life and death on the heap***
+
+**An Array is Like a Tray of Cups**
+
+When we create an array its like creating an object that stores many values. Here’s how we create them:
+
+`int[] num = new num[5];` 
+
+this creates a reference variable called `num` which references to an array called `num` .
+
+How to insert values inside the array above;
+
+`num[0] = 6;` 
+
+`num[1] = 19;`
+
+`num[2] = 21;`
+
+    :
+
+`num[x] = xx;`
+
+**Array are Objects**
+
+We can still have array of objects as below:
+
+`Dog[] pets = new Dog[6];` 
+
+This declares a new Dog array which has a reference of `pets` that will be used to access each object in the array of objects. To assign new objects into this array we use this snippet:
+
+`pets[0] = new Dog();`  #1
+
+`pets[1] = new Dog();` 
+
+This two parts create new objects that will be inside the array. **#1** will hold the first object in index position 1 in the array.
+
+Exercise : Sharpen your Pencil (pg60)
+
+1. null
+2. `pets[3] = pet[1];` 
+
+*How to control objects in an array.*
+
+eg; create an array and try to access methods for each object in the variable.
+
+`Dog[] pet = new Dog[5];`  creates an array of Dogs
+
+`pet[0] = new Dog();`  creates a new object in index position 1.
+
+Now we want to invoke a method for this new Dog. Lets give it a name; 
+
+`pet[0].name = “Fido”;` creates a name Fido for new object by use of the name() method.
+
+Basically we use the reference variable (name) `pet` in this case and the index position of the object `[0]` in order to access it then pass it to an instance variable  `.name` as shown above. For a method we have:
+
+`pet[0].bark();`  makes the dogs in the first index position to bark. Thats calling a method in an array.
+
+**NB: Rules of premitive data types are applied in this case eg you cant have an int inside a byte. there is *spillage* but one can have a byte inside an int since there is no spillage**
+
+puzzle: Heap o’ Trouble
+
+| Index | hq[index] Points to | id |
+| --- | --- | --- |
+| hq[0] | `null` | — |
+| hq[1] | `HeapQuiz` object | 1 |
+| hq[2] | `null` | — |
+| hq[3] | `HeapQuiz` object | 2 |
+| hq[4] | `HeapQuiz` object | 0 |
+
+Five-Minute Mystery
+
+```java
+Contact [] contacts = new Contact[10];
+while (x < 10 ) {
+// make 10 contact objects
+contacts[x] = new Contact();
+x = x + 1;
+}
+// do complicated Contact list updating with contacts
+```
+
+The code above will work because He has created an array that stores each value in the array thus can be accessed thereafter.
+
+```java
+Contact contactRef;
+while ( x < 10 ) {
+// make 10 contact objects
+contactRef = new Contact();
+x = x + 1;
+}
+// do complicated Contact list updating with contactRef
+```
+
+The above code is not OK since when we create an object its stored in the contact but when we rerun the loop the old contact is lost since one reference variable is being used `contactRef` .
