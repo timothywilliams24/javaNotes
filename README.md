@@ -874,3 +874,37 @@ BY definition, i take one argument - setter
 These help create encapsulation - setter and getters
 
 I always fly solo - return
+
+Exercise : *Mixed messages*
+```java
+public class Mix4 {
+	int counter = 0; // instance variable
+	
+	//main
+	public static void main (String[] args){
+		int count = 0;
+		Mix4[] mixes = new mix4[20]; // create an array of objects called mixes
+		int i =0;
+		while (i < 20){
+			mixes[i] = new Mix4(); // creates a new object with index 0
+			mixes[i].counter = mixes[i].counter + 1; //change the counter from original 0 to a 1
+			count = count + 1; // change sthe count to 1
+			count = count + mixes[i].maybeNew(i); // In relation to the first object, it takes the value of int to the maybeNew() method then runs the method first and returns its value and adds it to the count
+			i = i + 1; //Makes the cycle start 
+		}
+		System.out.println( count + " " + mixes[1].counter);
+	}
+	
+	public int maybeNew(int index) {
+		if (index < 5) {
+			Mix4 mix = new Mix4();
+			mix.counter = mix.counter + 1;
+			return 1;
+		}
+		return 0;
+	}
+}
+
+//outputs
+
+```
