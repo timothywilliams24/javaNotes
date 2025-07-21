@@ -513,3 +513,364 @@ x = x + 1;
 ```
 
 The above code is not OK since when we create an object its stored in the contact but when we rerun the loop the old contact is lost since one reference variable is being used `contactRef` .
+
+## Chapter 4: *How Objects Behave* .
+
+*Overview:*
+
+> How to make methods listen to instance variables before behaving.
+> 
+
+### ***The size affects the bark***
+
+We can have a situation where our object Dog can bark at different levels depending on its size. The methods in the class can be made to calculate its weight and bring out the right bark from the Dog.
+
+### ***You can send things to a method***
+
+***Arguments*** or ***parameter(values)***  can be passed to a method when the methods are invoked in the main.
+
+> A caller passes ***arguments***. A method  takes ***parameters***
+> 
+
+**NB**: If a method requires parameters then one *MUST* pass arguments when invoking methods.
+
+Example :
+
+1. Call the bark method and give it a value of 3 as the number of barks.
+    
+    ```java
+    Dog d = new Dog();
+    d.bark(3);
+    ```
+    
+2. The value  3 will be recieved by the method bark in the class blueprint.
+    
+    ```java
+    //method below
+    void bark (int numOfBarks){
+    	while (numOfBarks > 0) {
+    		System.out.println("ruff");
+    		numOfBarks = numOfBarks - 1;
+    	}
+    }
+    ```
+    
+    in the code above, our value 3 that we sent as an argument will be the parameter for our `bark()` method. so the variable in the bark brackets will take the value 3 `bark(int numOfBarks)` .
+    
+
+### *How to get values or things back from a method.*
+
+All the codes we have created so far have used void as below:
+
+`void bark() {`
+
+`}`
+
+*This will not return values that are inside this method.
+
+How do we `return` values? Lets see an example:
+
+```java
+int theSecret = life.giveSecret(); //value of returned value is stored in theSecret
+
+//the method
+int giveSecret() {
+	return 42;
+}
+```
+
+### Let’s Send Multiple Arguments
+
+How to do it:
+
+```java
+void go() {
+	TestStuff t = new TestStuff();
+	t.takeTwo(12, 34);
+
+}
+
+void takeTwo ( int x, int y) {
+	int z = x + y;
+	System.out.println("Total is " + z);
+}
+```
+
+One can pass varibles with their names only as long as they have the same type as the variables in the method.
+
+You can’t change the value of a variable that is outside a method that was changed inside a method. ****create an example** 
+
+### **Cool things you can do with parameters
+and return types.**
+
+Here we can make use of ***getters*** and ***setters*** in order to get values. As the name suggests, ***getters gets values*** and ***setters set values,.***
+
+### Encapsulation
+
+By using getters and setters we can let values being changed to be the appropriate ones not ones that are insane.Example:
+
+```java
+//wrong code 
+theCat.height = 0; //one can set cat value to zero which is imposssible thus we use a setter as below
+
+//better/right code
+public void setHeight(int ht) {
+	if (ht < 9){
+		height = ht;
+	}
+} // this sets the value of cat into height if it meets its standards.
+```
+
+Encapsulation ensures that code will not misused by hiding it in private.
+
+> From now on lets use `private` for instance variables and make getters and setters `public`
+> 
+
+so by default a class should have a setter and a getter so that in the future if at all i want to use it maybe set a constraint it does not break everyones code.
+
+Example:
+
+```java
+class GoodDog{
+	private int size;// private instance variable
+	
+	//below we get the size from private instance variable which will allow us to use the setSize
+	public int getSize(){
+		return size;
+	}
+	
+	//set the size by getting the value entered in the main and confirming if its ok then setting the size in the private instance variable, however below there is no confirmation
+	public void setSize(int s){
+		size = s;
+	} // in this one no confirmation if its OK.
+	
+	void bark() {
+	 if (size > 60){
+	  System.out.println("Woof! Woof!");
+	 } else if {
+		 System.out.println("Ruff! Ruff!");
+	 } else {
+		 System.out.println("Yip! Yip!");
+	 }
+	}
+}
+
+//MAIN
+class GoodDogTest {
+	public static void main (String[] args) {
+		GoodDog snoopy = new GoodDog(); // create a new object(one) 
+		snoopy.setSize(70); // set the size by calling the setSize setter for snoopy
+		GoodDog snowy = new GoodDog();
+		snowy.setSize(50);
+		
+		System.out.println("Dog one: " + snoopy.getSize());
+		System.out.println("Dog two: " + snowy.getSize());
+		snoopy.bark();
+		snowy.bark():
+	}
+}
+	
+```
+
+### How do objects in an array
+behave?
+
+Step 1: Create an array
+
+```java
+Dog[] pets;
+pets = new Dog[7];
+```
+
+Step 2 : Create many objects
+
+```java
+pets[0] = new Dog(); //reference is pets[0]
+pets[1] = new Dog();
+// remember pets[0] is the reference of objects we use it to access each index value as pets[0], pets[1] and etc
+```
+
+Step 3 : Call methods on the two Dog objects.
+
+```java
+pets[0].setWeight(30); //sets the weight of the first object to 30
+pets[1].setWeight(50); //sets weight of this object to 20
+
+//displaying the weights
+System.out.println( "Weight of the first dog is " + pets[0].getWeight() );
+System.out.println( "Weight of the second Dog is " + pets[1].getWeight() );
+
+```
+
+TO-DO:
+
+*create array programs atleast 2 and create get and setters atleast two for practise.
+
+### Declaring and initializing
+instance variables
+
+In a class when creating a new instance variable we can leave them with no value as below:
+
+`private int age;` 
+
+This will give age a value even though it has not been assigned to any value. The default value is 0. We can use this to initialise the instance variable and set values later in the program.
+
+### The difference between instance
+and local variables
+
+Local variables live inside the methods, they work only inside the methods eg
+
+```java
+class Bank {
+	private int balance; // INstance variable, they are not declared inside a method
+	
+	public int addAmount() {
+		//local variable created inside a method 
+		int depAmount = 400;
+	}
+]	 
+```
+
+### Comparing variables (primitives or references)
+
+We use `==` to compare primitive values this can help us know if certain varibles hold the same value, eg;
+
+```java
+int a = 3;
+int b = 3;
+
+if (a == b) {
+	//code
+}
+```
+
+Lets say we want to know if two reference variables point to the same object we use `==` , eg;
+
+```java
+Dog a = new Dog();
+Dog b = new Dog();
+Dog c = a; // now reference variable c will point to object a, we didnt create a new object.
+
+if ( a == c ){
+ //This code will run cause a and c reference to the same object a
+}
+if (a == b) { }//will not run.
+if (b == c) { }//will not run.
+```
+
+***NOTE:***
+
+ `==` is only used to compare the values of primitive if they hold the same value and for reference variable it checks is they reference to the same object as above 
+
+`.equal()`  is used when we want to know if the values of an object are the same eg are two objects having the same value `name` in them if they can be declared names. when we want to compare something inside an object we use `.equal()` .
+
+### EXERCISES:
+
+EXC 1: ***Shapern your Pencil***
+
+*Given the method below which of the method calls listed are illegal? Put a checkmark to the ones that are legal.*
+
+```java
+int calcArea (int height, int width) {
+	return height * width;
+}
+```
+
+int a = calcArea(7, 12); 
+short c = 7; 
+calcArea(c, 15);  *legal*
+
+int d = calcArea(57); *illegal set aonly one argument rather than two* 
+
+calcArea(2, 3); *legal * this will work but the returned value will not be stored anywhere*
+
+long t = 42;
+int f = calcArea(t, 17); illegal passed a big value to a small datatype
+
+int g = calcArea(); *illegal passed no arguments*
+
+calcArea(); *illegal passed no arguments*
+
+byte h = calcArea(4, 20); *illegal spillage big data type into small datatype*
+
+int j = calcArea(2, 3, 5); *illegal more arguments*
+
+Note: you can not give send an argument that does not fit in the type eg an int into a byte. You cannot set three arguments when the parameters are two only. 
+
+EXC 2: ***Be The Compiler***
+
+CODE A:
+
+```java
+class XCopy {
+	int go(int arg) {
+		arg = arg * 2;
+		return arg;
+	}
+}
+class XCopyTest{
+	public static void main(String[] args) {
+		int orig = 42;
+		XCopy x = new XCopy();
+		int y = x.go(orig);
+		System.out.println(orig + " " + y);
+	}
+}
+```
+
+NB : from the notes it will still run.
+
+CODE B:
+
+```java
+class Clock {
+	private String time;
+
+	public String getTime() {
+		return time;
+	}
+		
+	public void setTime(String t) {
+		time = t;
+	}
+
+}
+
+class ClockTestDrive {
+	public static void main(String[] args) {
+		Clock c = new Clock();
+
+		c.setTime("1245");
+		String tod = c.getTime();
+		System.out.println("time: "+tod);
+	}
+}
+```
+
+Exercise : *Who Am I?*
+
+A class can have any number of these - instance variables, getter and setter ,methods
+
+A method can have only one of these - return.
+
+This can be implicitly promoted - return, argument
+
+I prefer my instance varible private - encapsulation
+
+It really means “make a copy” - pass by value
+
+Only setters should update these - instance variables
+
+A method can have many of these - pass by value, return
+
+I return something by definition - getter
+
+I shouldn’t be used with instance variables - public
+
+I can have many arguments - method
+
+BY definition, i take one argument - setter
+
+These help create encapsulation - setter and getters
+
+I always fly solo - return
