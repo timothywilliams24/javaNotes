@@ -908,3 +908,88 @@ public class Mix4 {
 //outputs
 
 ```
+## CHAPTER 5: Writing A Real Program
+
+### Building a Real Game
+
+**Goal** : Sinking ships by guessing where they are and get a high score for all the correct entries.
+
+**Set-up** : A **virtual grid 7 x 7** where the ships are placed.
+
+**How To Play** : We will use a commandline setup for now, the player will enter the cell where he/or she thinks the ship is. The game willl end after you have sinked all 3 ships and a rating will be calculated depending on the number of misses and hits.
+
+High-Level Design of the game
+
+1. We create a virtual grid with all the cells
+2. It places the three startups/ships in the cells randomly.
+3. During gameplay, prompt users for a guess
+4. Check the guess if its a hit( delete cell) , miss or kill (delete startup)
+5. After no more startups left, finish the game and give the gamer ratings based on number of guesses.
+
+### Simpler Version of the Game
+
+1. We have 3 cells that are occupied by one startup.
+2. The game begins. It requests for guesses, the guesses are checked to see if its a hit and is stored in a variable eg noOfHits. Once the the hits are many then it will sink the startup
+3. After the number of hits exceed 3 which are the cells with the startup the game will end then show the number of guesses it took.
+
+### Developing a Class
+
+When developing a class we focus on;
+
+1. **Prep code**  
+
+pseudocode that helps focus on logic of the class
+
+1. **Test code**
+
+A class or methods that will test the real code to see if it works as it should.
+
+1. **Real code**
+
+Writing the real JAVA program.
+
+### Lets Write our : PrepCode
+
+pseudocode:
+
+```java
+**SimpleStartup class:**
+
+instance variables:
+	locationCells
+	numberOfHits
+	
+methods:
+	//check the guess
+	METHOD 1: Confirm a hit, miss or kill
+		REPEAT: with each location cell
+			//compare the guess with our location cells
+			IF 1: user matches the location
+				ADD the number of hits
+				//lets see if its the last location cell
+				IF 2: number of hits is 3 RETURN a "kill"
+				 ELSE RETURN a "hit"
+				ELSE RETURN "miss"
+				END IF 2
+			END IF 1
+		END REPEAT
+	END METHOD 1	
+	
+	//set location cell
+	METHOD 2 : setLocation of each cell
+		GET the cell locations - 3 of them 
+		ASSIGN them to the locationCells
+```
+
+### Lets Write our : TestCode
+
+Test Code for our class:
+
+Tasks :
+
+1. Generate a cellLocations for our program
+2. Create 1  guess for the program
+3. Invoke method 1
+4. Print out the test result if my guess matches the celllocation, fail or passed
+
+### Lets Write our : RealCode
